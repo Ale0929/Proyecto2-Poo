@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Afase
+ * @author Wess
  */
 public class TestFile {
 
