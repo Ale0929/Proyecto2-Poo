@@ -16,7 +16,7 @@ import javax.swing.*;
 
 /**
  *
- * @author Afase
+ * @author Wess
  */
 
 public final class Galton extends JPanel implements ActionListener{
