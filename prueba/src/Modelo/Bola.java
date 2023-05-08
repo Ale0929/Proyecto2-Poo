@@ -21,16 +21,6 @@ public class Bola extends Thread{
     private boolean contado;
     private Color color;
     private boolean initialized;
-public final class Bola extends Thread{
-
-    private int x;
-    private int y;
-    private int limite;
-    private int resultado;
-    private boolean derecha;
-    private boolean contado;
-    private Color color;
-    private boolean initialized;
     
     public Bola(int CantidadRows){
         this.limite = CantidadRows*32;
@@ -38,23 +28,23 @@ public final class Bola extends Thread{
         this.y=0;
         contado = false;
         color = Color.red;
-//        Random rand = new Random();       
-//        int cL;                             
-//        cL = rand.nextInt(4 - 1 + 1) + 1;
-//        switch(cL){
-//            case 1:
-//                color = Color.RED;
-//                break;
-//            case 2:
-//                color = Color.ORANGE;
-//                break;
-//            case 3:
-//                color = Color.BLUE;
-//                break;
-//            case 4:
-//              color = Color.GRAY;
-//                break;
-//        }
+        Random rand = new Random();       
+        int cL;                             
+        cL = rand.nextInt(4 - 1 + 1) + 1;
+        switch(cL){
+            case 1:
+                color = Color.BLUE;
+                break;
+            case 2:
+                color = Color.BLUE;
+                break;
+            case 3:
+                color = new Color(0, 0, 139);
+                break;
+            case 4:
+              color = new Color(0, 127, 255);
+                break;
+        }
     }
     
     @Override
@@ -69,7 +59,7 @@ public final class Bola extends Thread{
                     try {
                         Thread.sleep(35);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(Bola.class.getName()).log(Level.SEVERE, null, ex);
+
                     }
                 }
             }
@@ -80,7 +70,7 @@ public final class Bola extends Thread{
                     try {
                         Thread.sleep(35);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(Bola.class.getName()).log(Level.SEVERE, null, ex);
+
                     }
                 }
             }
