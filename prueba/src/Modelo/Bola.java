@@ -21,21 +21,40 @@ public class Bola extends Thread{
     private boolean contado;
     private Color color;
     private boolean initialized;
+public final class Bola extends Thread{
+
+    private int x;
+    private int y;
+    private int limite;
+    private int resultado;
+    private boolean derecha;
+    private boolean contado;
+    private Color color;
+    private boolean initialized;
     
     public Bola(int CantidadRows){
         this.limite = CantidadRows*32;
         this.x=0;
         this.y=0;
         contado = false;
-        Random rand = new Random(); 
-        boolean red;
-        red = rand.nextBoolean();
-        if (red){
-            color = Color.RED;
-        }
-        else{
-            color = Color.BLUE;
-        }
+        color = Color.red;
+//        Random rand = new Random();       
+//        int cL;                             
+//        cL = rand.nextInt(4 - 1 + 1) + 1;
+//        switch(cL){
+//            case 1:
+//                color = Color.RED;
+//                break;
+//            case 2:
+//                color = Color.ORANGE;
+//                break;
+//            case 3:
+//                color = Color.BLUE;
+//                break;
+//            case 4:
+//              color = Color.GRAY;
+//                break;
+//        }
     }
     
     @Override
