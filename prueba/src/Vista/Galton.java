@@ -11,7 +11,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import javax.swing.*;
 
 /**
@@ -21,7 +20,7 @@ import javax.swing.*;
 
 public final class Galton extends JPanel implements ActionListener{
     private Bola[] bolas;
-    private final int numeroBolas = 300;
+    private final int numeroBolas = 350;
     private int tamaño;
     private Timer timer;
     private int currentBola;
@@ -32,7 +31,8 @@ public final class Galton extends JPanel implements ActionListener{
         this.tamaño = columns;
         resultados = new int[columns+1];
         currentBola = 0;
-        this.setPreferredSize(new Dimension(32*tamaño*2+ 64, 32*tamaño + 200));
+        this.setBackground(Color.WHITE);
+        this.setPreferredSize(new Dimension(32*tamaño*2+ 64, 32*tamaño + 128));
         timer = new Timer(35, this);
         bolas = new Bola[numeroBolas];
         for (int i=0; i<numeroBolas; i ++){
@@ -43,13 +43,12 @@ public final class Galton extends JPanel implements ActionListener{
         }
         timer.start();
         frame = new JFrame(); //Esto es para crear un frame que contenga a este panel. Si quieres, puedes meter este
-        frame.setTitle("Galton Simulation"); //panel dentro del frame de seleccionar operacion. pero no lo recomiendo
+        frame.setTitle("Galton board simulation"); //panel dentro del frame de seleccionar operacion. pero no lo recomiendo
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this);        //Aunque si quieres, debes borrrar este JFrame
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setResizable(false);
     }
 
     @Override
@@ -82,8 +81,8 @@ public final class Galton extends JPanel implements ActionListener{
             String valor = Integer.toString(resultados[i]);// prueba. Genera una grafica sencilla con cuadros.
             g2D.setColor(Color.BLACK);
             g2D.drawString(valor, i*64+32, tamaño*32);
-            g2D.setColor(Color.GREEN);
-            g2D.fillRect(i*64+16, tamaño*32 + 5, 32, 2*resultados[i]);
+            g2D.setColor(Color.CYAN);
+            g2D.fillRect(i*64+16, tamaño*32 + 5, 32, resultados[i]);
             
         }
     }
@@ -107,6 +106,6 @@ public final class Galton extends JPanel implements ActionListener{
     }
     
     public static void main (String[] args){ // Para pruebas
-        Galton galton = new Galton(9);//Para instanciar, agrega el tamaño que tiene el triangulo.
+        new Galton(10);//Para instanciar, agrega el tamaño que tiene el triangulo.
     }
 }
