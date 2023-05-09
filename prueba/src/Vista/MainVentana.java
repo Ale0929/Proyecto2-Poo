@@ -3,23 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vista;
-import Controlador.controlador;
+
+import Control.Controlador;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author alejandropachecosanchez
  */
 public class MainVentana extends javax.swing.JFrame {
-    
-//    static Controlador controlador = new Controlador();
+    public static Controlador controlador = new Controlador();
 
     /**
      * Creates new form MainVentana
      */
     public MainVentana() {
         initComponents();
-        this.setLocationRelativeTo(null);
-        
+        this.setLocationRelativeTo(null);   
     }
 
     /**
@@ -34,9 +34,7 @@ public class MainVentana extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         numeroTriangulo = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         btnCrearTriangulo = new javax.swing.JButton();
-        funcionTrianguloMain = new javax.swing.JTextField();
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,15 +42,8 @@ public class MainVentana extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bodoni 72 Smallcaps", 3, 18)); // NOI18N
         jLabel1.setText("TRIÁNGULO DE PASCAL");
 
-        jLabel2.setText("Escoja el número para la realizacion del triángulo: ");
+        jLabel2.setText("Escoja el número de niveles para crear triángulo: (max=10)");
 
-        numeroTriangulo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numeroTrianguloActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Escoja que función desea hacer con el triángulo: ");
 
         btnCrearTriangulo.setBackground(new java.awt.Color(102, 255, 102));
         btnCrearTriangulo.setFont(new java.awt.Font("Bodoni 72", 0, 14)); // NOI18N
@@ -81,8 +72,7 @@ public class MainVentana extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel3))
+                                .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(83, 83, 83)
                                 .addComponent(jLabel1))
@@ -93,7 +83,6 @@ public class MainVentana extends javax.swing.JFrame {
                                 .addGap(108, 108, 108)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnCrearTriangulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(funcionTrianguloMain)
                                     .addComponent(numeroTriangulo))))
                         .addGap(0, 96, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -111,9 +100,7 @@ public class MainVentana extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(numeroTriangulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(funcionTrianguloMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(btnCrearTriangulo)
                 .addGap(18, 18, 18))
@@ -126,17 +113,24 @@ public class MainVentana extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void numeroTrianguloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroTrianguloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_numeroTrianguloActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalirActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {
+        this.dispose();
+    }
 
     private void btnCrearTrianguloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearTrianguloActionPerformed
-        this.setVisible(false);
-        // PARA CONECTAR CON LO DEL CONTROLADOR
+        try{
+            int value = Integer.valueOf(numeroTriangulo.getText());
+            if (0<value && value<=10){
+                this.setVisible(false);
+                new EscogerOperacion(Integer.valueOf(numeroTriangulo.getText()), this);
+            }
+            else
+                JOptionPane.showMessageDialog(this, "Número ingresado incorrecto", "Error", 1);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número", "Error", 1);
+        } finally {
+            this.numeroTriangulo.setText("");
+        }
     }//GEN-LAST:event_btnCrearTrianguloActionPerformed
 
     /**
@@ -154,10 +148,8 @@ public class MainVentana extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearTriangulo;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JTextField funcionTrianguloMain;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField numeroTriangulo;
     // End of variables declaration//GEN-END:variables
 }
