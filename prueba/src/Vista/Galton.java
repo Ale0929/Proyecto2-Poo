@@ -14,13 +14,15 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- *
  * @author Wess
+ * Creado por Wesley Esquivel Mena.
+ * ¿Proposito de la clase?:
+ * > Generar una simulacion 2d de una tabla de galton.
  */
 
 public final class Galton extends JPanel implements ActionListener{
     private Bola[] bolas;
-    private final int numeroBolas = 350;
+    private final int numeroBolas = 1000;
     private int tamaño;
     private Timer timer;
     private int currentBola;
@@ -50,11 +52,19 @@ public final class Galton extends JPanel implements ActionListener{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
+/**
+ * paint Method
+ * @param g
+ * Se utiiza la liberia de java.awt.graphics para dibujar en el JPannel una
+ * representacion grafica de la tabla de galton. Este metodo es llamado unas
+ * 60 veces por segundo para re-dibujar todos los componentes en la pantalla
+ * Y mostrar la trayectoria de las mil bolas que lanza el programa.
+ */
     @Override
     public void paint(Graphics g){  //Paint method.
         super.paint(g);             //Se usa para dibujar cualquier cosa en el panel.
         Graphics2D g2D = (Graphics2D) g;
+        
         g2D.setColor(Color.BLACK);
         int start = this.getWidth()/2;
         int y;
@@ -69,6 +79,7 @@ public final class Galton extends JPanel implements ActionListener{
             start -=32;
             cantidad +=1; 
         }
+        
         for (Bola bola : bolas) {  // Revisa la posicion de las bolas y el color que tienen para
             if (bola.isAlive()) {  // dibujarlas en el grafico
                 g2D.setColor(bola.getColor());
@@ -77,16 +88,26 @@ public final class Galton extends JPanel implements ActionListener{
                 g2D.fillOval(Bx, By, 16, 16);
             }
         }
+        
         for(int i= 0; i< resultados.length; i ++){  //este otro loop se usa para graficar los resultados de la
             String valor = Integer.toString(resultados[i]);// prueba. Genera una grafica sencilla con cuadros.
             g2D.setColor(Color.BLACK);
-            g2D.drawString(valor, i*64+32, tamaño*32);
-            g2D.setColor(Color.CYAN);
-            g2D.fillRect(i*64+16, tamaño*32 + 5, 32, resultados[i]);
-            
+            g2D.drawString(valor, this.getWidth()/2 - 32*tamaño + i*64, tamaño*32+8);
+            g2D.setColor(new Color (0,185,205));
+            g2D.fillRect(this.getWidth()/2 - 32*tamaño + i*64 -16, tamaño*32 + 14, 40, resultados[i]);
         }
+        
+        
     }
-
+/**
+ * @param e 
+ * Descripcion: ActionPerfomed method
+ *  El programa tiene un atributo de timer, el cual se ejecuta cada 35 milesimas
+ *  de segundo, o cada 0,0035 segundos. Cada vez que el timer repite esta cantidad
+ *  de tiempo el programa lanza una nueva bola, repinta todos los elementos de
+ *  la tabla y verifica si las bolas ya llegaron a su destino para graficar
+ *  la distribucion abajo del triangulo.
+ */
     @Override
     public void actionPerformed(ActionEvent e) {// Cada 0.05 segundos o 30 veces por segundo(~30fps)
         repaint();                              // se actualizan los graficos y la posicion de las bolas
