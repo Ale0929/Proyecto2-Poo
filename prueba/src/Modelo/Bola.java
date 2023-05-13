@@ -7,9 +7,9 @@ import java.util.Random;
 import java.awt.Color;
 /**
  *
- * @author Afase
+ * @author Wess
  */
-public class Bola extends Thread{
+public final class Bola extends Thread{
 
     private int x;
     private int y;
@@ -20,55 +20,60 @@ public class Bola extends Thread{
     private Color color;
     private boolean initialized;
     
+    /**
+     * Constructor de la clase
+     * @param CantidadRows 
+     * Se encarga de inicializar los valores basicos de la bola.
+     * Le asigna un color aleatorio derivado del azul, para que
+     * se pueda mostrar con mayor claridad la trayectoria de cada bola. 
+     */
+    
     public Bola(int CantidadRows){
         this.limite = CantidadRows*32;
         this.x=0;
-        this.y=0;
+        this.y=6;
         contado = false;
-        color = Color.red;
         Random rand = new Random();       
-        int cL;                             
-        cL = rand.nextInt(4 - 1 + 1) + 1;
+        int cL = rand.nextInt(4 - 1 + 1) + 1;
         switch(cL){
             case 1:
-                color = Color.BLUE;
+                color = new Color(2, 119, 189);
                 break;
             case 2:
                 color = Color.BLUE;
                 break;
             case 3:
-                color = new Color(0, 0, 139);
+                color = new Color(0, 0, 180);
                 break;
             case 4:
               color = new Color(0, 127, 255);
                 break;
         }
+        this.setPriority(1);
     }
     
     @Override
     public void run(){
         Random rd = new Random();
-        while(y!= limite){
+        while(y!= limite+6){
             derecha = rd.nextBoolean();
             if (derecha){
-                for(int i = 0; i<8; i++){
+                for(int i = 8; i>0; i--){
                     x +=4;
                     y +=4;
                     try {
-                        Thread.sleep(35);
+                        Thread.sleep(30);
                     } catch (InterruptedException ex) {
-
                     }
                 }
             }
             else{
-                for(int i = 0; i<8; i++){
+                for(int i = 8; i>0; i--){
                     x -= 4;
                     y +=4;
                     try {
-                        Thread.sleep(35);
+                        Thread.sleep(30);
                     } catch (InterruptedException ex) {
-
                     }
                 }
             }
@@ -110,3 +115,4 @@ public class Bola extends Thread{
         this.initialized = initialized;
     }
 }
+
